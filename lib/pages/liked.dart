@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movie_app/main.dart';
 import 'package:movie_app/models/movie_model.dart';
 import 'package:movie_app/pages/detail_page.dart';
 import 'package:movie_app/services/services.dart';
@@ -12,8 +13,10 @@ class Liked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    kBackgroundColor;
     final PageController controller = PageController();
     return ValueListenableBuilder(
+
       valueListenable: Hive.box<LikedModel>('liked').listenable(),
       builder: (context, Box<LikedModel> box, _) {
         if (box.isNotEmpty) {
@@ -140,30 +143,31 @@ class Liked extends StatelessWidget {
                                       const Spacer(
                                         flex: 2,
                                       ),
-                                      Expanded(
-                                        child: IconButton(
-                                            onPressed: () {
-                                              liked.delete();
-                                              if (box.values.length > 3) {
-                                                controller.jumpToPage(
-                                                  index,
-                                                );
-                                              } else if (box.values.length ==
-                                                  2) {
-                                                controller.jumpToPage(
-                                                  1,
-                                                );
-                                              } else {
-                                                controller.jumpToPage(
-                                                  0,
-                                                );
-                                              }
-                                            },
-                                            icon: const Icon(
-                                              Icons.delete_sweep,
-                                              color: Colors.black,
-                                            )),
-                                      ),
+                                      // Expanded(
+                                      //   child: IconButton(
+                                      //       onPressed: () {
+                                      //         liked.delete();
+                                      //         if (box.values.length > 3) {
+                                      //           controller.jumpToPage(
+                                      //             index,
+                                      //           );
+                                      //         } else if (box.values.length ==
+                                      //             2) {
+                                      //           controller.jumpToPage(
+                                      //             1,
+                                      //           );
+                                      //         } else {
+                                      //           controller.jumpToPage(
+                                      //             0,
+                                      //           );
+                                      //         }
+                                      //       },
+                                      //       icon: const Icon(
+                                      //         Icons.delete_sweep,
+                                      //         color: Colors.black,
+                                      //       )
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                 ),

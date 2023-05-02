@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/services/services.dart';
 import 'package:movie_app/widgets/movies_listview.dart';
 import 'package:movie_app/widgets/search.dart';
+import '../models/credit_model.dart';
 import '../models/movie_model.dart';
+import '../widgets/upcoming.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
@@ -12,24 +14,25 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  late Future<Model> comedyFuture,
-      actionFuture,
-      horrorFuture,
-      dramaFuture,
-      romanceFuture,
-      familyFuture;
-  @override
-  void initState() {
-    comedyFuture = discoverMovies(genreId: 35);
-    actionFuture = discoverMovies(genreId: 28);
-    horrorFuture = discoverMovies(genreId: 27);
-    dramaFuture = discoverMovies(genreId: 18);
-    familyFuture = discoverMovies(genreId: 10751);
-    romanceFuture = discoverMovies(genreId: 10749);
-    super.initState();
-    print('backdropPath: json["backdrop_path"]');
-    print('Model.${Model}');
-  }
+
+  // late Future<Model> comedyFuture,
+  //     actionFuture,
+  //     horrorFuture,
+  //     dramaFuture,
+  //     romanceFuture,
+  //     familyFuture;
+  // @override
+  // void initState() {
+  //   comedyFuture = discoverMovies(genreId: 35);
+  //   actionFuture = discoverMovies(genreId: 28);
+  //   horrorFuture = discoverMovies(genreId: 27);
+  //   dramaFuture = discoverMovies(genreId: 18);
+  //   familyFuture = discoverMovies(genreId: 10751);
+  //   romanceFuture = discoverMovies(genreId: 10749);
+  //   super.initState();
+  //   print('backdropPath: json["backdrop_path"]');
+  //   print('Model.${Model}');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class _ExplorePageState extends State<ExplorePage> {
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             height: 70,
+
             child: Card(
               color: Colors.grey.withOpacity(.5),
               shape: RoundedRectangleBorder(
@@ -59,8 +63,12 @@ class _ExplorePageState extends State<ExplorePage> {
                 ),
               ),
             ),
+
           ),
+
+
         ),
+
         // MoviesListView(future: comedyFuture, headlineText: 'Comedy Movies'),
         // MoviesListView(future: actionFuture, headlineText: 'Action Movies'),
         // MoviesListView(future: dramaFuture, headlineText: 'Drama Movies'),

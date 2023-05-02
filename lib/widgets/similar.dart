@@ -28,9 +28,13 @@ class _SimilarWidgetState extends State<SimilarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MoviesListView(
+    var snapshot;
+    return
+              MoviesListView(
       future: _future,
       headlineText: 'Similar',
+
+
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 import 'package:movie_app/models/credit_model.dart';
 import 'package:movie_app/models/liked_model.dart';
 import 'package:movie_app/utils.dart';
-import 'package:movie_app/widgets/cast.dart';
 import 'package:movie_app/widgets/similar.dart';
 import '../models/movie_model.dart';
 
@@ -25,6 +24,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  bool isReadmore = false;
+
   @override
   Widget build(BuildContext context) {
     var box = Hive.box<LikedModel>('liked');
@@ -56,7 +57,9 @@ class _DetailPageState extends State<DetailPage> {
                                     )
                                     ?.isLiked ??
                                 false)));
-                    setState(() {});
+                    setState(() {
+                      // print('sakthi:${widget.index.runtimeType}');
+                    });
                   },
                   icon: box
                               .get(
@@ -93,29 +96,7 @@ class _DetailPageState extends State<DetailPage> {
                       widget.data.results[widget.index].name!,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                // Wrap(
-                //   children: List.generate(
-                //       widget.data.results[widget.index].genreIds!.length,
-                //       (genreIndex) => Padding(
-                //             padding: const EdgeInsets.only(right: 10, top: 4),
-                //             child: Chip(
-                //               shape: RoundedRectangleBorder(
-                //                   borderRadius: BorderRadius.circular(10)),
-                //               side: const BorderSide(width: 0),
-                //               backgroundColor: kBackgoundColor.withOpacity(.9),
-                //               label: Text(
-                //                 getGenres(widget
-                //                         .data.results[widget.index].genreIds!)
-                //                     .split(',')
-                //                     .elementAt(genreIndex),
-                //                 style: Theme.of(context)
-                //                     .textTheme
-                //                     .bodyMedium!
-                //                     .copyWith(color: Colors.white70),
-                //               ),
-                //             ),
-                //           )),
-                // ),
+
                 const SizedBox(
                   height: 6,
                 ),
@@ -151,30 +132,42 @@ class _DetailPageState extends State<DetailPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(
+                buildText(
                   widget.data.results[widget.index].overview!,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Colors.white.withOpacity(.9), fontSize: 15),
                 ),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isReadmore = !isReadmore;
+                      });
+                    },
+                    child: Text((isReadmore ? 'less...' : 'more...'))),
+
+                // Text(
+                //   widget.data.results[widget.index].overview!,
+                //   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                //       color: Colors.white.withOpacity(.9), fontSize: 15),
+                // ),
                 const SizedBox(
                   height: 25,
                 ),
-                // CastWidget(
-                //   id: widget.data.results[widget.index].id!,
-                //   isTvShow: widget.isTvShow,
-                // ),
-                // SimilarWidget(
-                //     data: widget.data,
-                //     index: widget.index,
-                //     isTvShow: widget.isTvShow),
-                // ReviewsWidget(
-                //     isTvShow: widget.isTvShow,
-                //     id: widget.data.results[widget.index].id!)
               ],
             ),
           );
         }, childCount: 1))
       ],
     ));
+  }
+
+  Widget buildText(String text) {
+    final lines = isReadmore ? null : 2;
+    return Text(
+      text,
+      style: Theme.of(context)
+          .textTheme
+          .bodyMedium!
+          .copyWith(color: Colors.white.withOpacity(.9), fontSize: 15),
+      maxLines: lines,
+    );
   }
 }
