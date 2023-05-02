@@ -1,6 +1,5 @@
-# Movie App 🎬 🍿
 
-## This project is not yet completed, when it's complete I will update it here.
+
 
 [//]: # (<p>)
 
